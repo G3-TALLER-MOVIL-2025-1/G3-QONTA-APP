@@ -1,0 +1,1 @@
+ C:\\Users\\Usuario\\Desktop\\FLUTTER\\proyecto\\G3-QONTA-APP\\.dart_tool\\flutter_build\\9bbd511d76763f4f7e2f69d45a8ba437\\dart_build_result.json: 

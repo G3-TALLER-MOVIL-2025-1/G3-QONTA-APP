@@ -1,0 +1,2 @@
+C:/Users/Usuario/Desktop/FLUTTER/proyecto/G3-QONTA-APP/android/app/.cxx/Debug/3x1g3n21/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Usuario/Desktop/FLUTTER/proyecto/G3-QONTA-APP/android/app/.cxx/Debug/3x1g3n21/armeabi-v7a/CMakeFiles/rebuild_cache.dir

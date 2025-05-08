@@ -66,7 +66,10 @@ class WelcomeView extends StatelessWidget{
                     ),
                     GestureDetector(
                       onTap: () {
-                        // Navegar al registro
+                        Navigator.pushNamed(
+                        context,
+                        'register',
+                        );
                       },
                       child: const Text(
                         'Registrar',
