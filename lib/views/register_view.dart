@@ -84,6 +84,28 @@ class RegisterView extends StatelessWidget{
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
+                      Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          '¿Ya tienes una cuenta? ',
+                          style: TextStyle(color: Colors.black,fontSize: 20,),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            // Navegar a Login
+                          },
+                          child: const Text(
+                            'Ingresar',
+                            style: TextStyle(
+                              color: kPrimaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     ],
                   )
                 )
