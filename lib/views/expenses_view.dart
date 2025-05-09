@@ -154,7 +154,12 @@ class _MyHomePageState extends State<ExpenseView> {
             ),
             ListTile(
               title: Text('Cerrar Sesión', style: TextStyle(fontSize: 20)),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(
+                        context,
+                        'welcome',
+                );
+              },
             ),
           ],
         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qonta_app/constants/constants.dart';
 
-class RegisterView extends StatelessWidget{
-  const RegisterView({super.key});
+class LoginView extends StatelessWidget{
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,30 +45,18 @@ class RegisterView extends StatelessWidget{
                   child: Column(
                     children: [
                       SizedBox(height: 20.0),
-                      Text("Completa tus datos personales",
+                      Text("Bienvenido a QONTA",
                        style: TextStyle(
                          fontSize: 20,
                          color: Colors.black,
                        )),
-                      SizedBox(height: 10.0),
-                      _textFieldName(),
-                      SizedBox(height: 10.0),
-                      _textFieldLastName(),
+                      
                       SizedBox(height: 10.0),
                       _textFieldEmail(),
                       SizedBox(height: 10.0),
                       _textFieldPassword(),
-                      SizedBox(height: 10.0),
-                      _textField(),
-                      SizedBox(height: 10.0),
-                      ListTile(
-                        leading: Icon(Icons.check_box_outlined),
-                        title: Text(
-                          "Acepto los términos y condiciones",
-
-                        ),
-                        
-                      ),
+                      SizedBox(height: 30.0),
+                      
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                         backgroundColor: kPrimaryColor,
@@ -77,10 +65,13 @@ class RegisterView extends StatelessWidget{
                         ),
                         ),
                         onPressed: () {
-                          // Registrar
+                          Navigator.pushNamed(
+                          context,
+                          'main',
+                        );
                         },
                         child: const Text(
-                          'Registrar',
+                          'Ingresar',
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
@@ -88,18 +79,18 @@ class RegisterView extends StatelessWidget{
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          '¿Ya tienes una cuenta? ',
+                          'No tienes una cuenta? ',
                           style: TextStyle(color: Colors.black,fontSize: 20,),
                         ),
                         GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(
                             context,
-                            'login',
+                            'register',
                         );
                           },
                           child: const Text(
-                            'Ingresar',
+                            'Registrar',
                             style: TextStyle(
                               color: kPrimaryColor,
                               fontWeight: FontWeight.bold,
@@ -119,21 +110,10 @@ class RegisterView extends StatelessWidget{
       )
     );
   }
-Widget _textFieldName() {
-  return _textFieldGeneral(
-    labelText: 'Nombres',
-    onChanged: (value) {},
-    );
-}
-Widget _textFieldLastName() {
-  return _textFieldGeneral(
-    labelText: 'Apellidos',
-    onChanged: (value) {},
-    );
-}
+
 Widget _textFieldEmail() {
   return _textFieldGeneral(
-    labelText: 'Correo',
+    labelText: 'Email',
     onChanged: (value) {},
     );
 }
@@ -143,12 +123,7 @@ Widget _textFieldPassword() {
     onChanged: (value) {},
   );
 }
-Widget _textField() {
-  return _textFieldGeneral(
-    labelText: 'Repite Contraseña',
-    onChanged: (value) {},
-    );
-}
+
 
 }
 

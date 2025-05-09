@@ -48,7 +48,10 @@ class WelcomeView extends StatelessWidget{
                       ),
                     ),
                     onPressed: () {
-                      // Navegar al login
+                      Navigator.pushNamed(
+                        context,
+                        'login',
+                        );
                     },
                     child: const Text(
                       'Ingresar',

@@ -185,7 +185,10 @@ class _MyHomePageState extends State<MainView>{
             ListTile(
               title: Text('Cerrar Sesión', style: TextStyle(fontSize: 20),),
               onTap: () {
-
+                Navigator.pushNamed(
+                        context,
+                        'welcome',
+                );
               },
             ),
           ]

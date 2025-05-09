@@ -240,7 +240,12 @@ class _MyHomePageState extends State<TransactionsView> {
             ),
             ListTile(
               title: Text('Cerrar Sesión', style: TextStyle(fontSize: 20)),
-              onTap: () {},
+              onTap: () {
+                 Navigator.pushNamed(
+                        context,
+                        'welcome',
+                );
+              },
             ),
           ],
         ),
