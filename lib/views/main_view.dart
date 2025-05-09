@@ -176,7 +176,10 @@ class _MyHomePageState extends State<MainView>{
             ListTile(
               title: Text('Historial', style: TextStyle(fontSize: 20),),
               onTap: () {
-
+                Navigator.pushNamed(
+                        context,
+                        'transactions',
+                );
               },
             ),
             ListTile(
