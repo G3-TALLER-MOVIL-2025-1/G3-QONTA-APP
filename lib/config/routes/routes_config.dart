@@ -5,6 +5,7 @@ import 'package:qonta_app/views/main_view.dart';
 import 'package:qonta_app/views/expenses_view.dart';
 import 'package:qonta_app/views/transactions_view.dart';
 import 'package:qonta_app/views/login_view.dart';
+import 'package:qonta_app/views/scanner_view.dart';
 
 //set routes names
 import 'package:flutter/widgets.dart';
@@ -16,4 +17,5 @@ Map<String, Widget Function(BuildContext)> routes = {
   'expenses': (_) => const ExpenseView(),
   'transactions': (_) => const TransactionsView(),
   'login': (_) => const LoginView(),
+  'scanner': (_) => const ScannerView(),
 };

@@ -99,7 +99,10 @@ class _MyHomePageState extends State<MainView>{
                         ),
                         ),
                         onPressed: () {
-                          // Scanear voucher
+                          Navigator.pushNamed(
+                          context,
+                          'scanner',
+                        );
                         },
                         child: const Text(
                           'Scanear voucher',
@@ -162,7 +165,12 @@ class _MyHomePageState extends State<MainView>{
             ),
              ListTile(
               title: Text('Escanear', style: TextStyle(fontSize: 20)),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(
+                        context,
+                        'scanner',
+                );
+              },
             ),
             ListTile(
               title: Text('Ingreso Manual', style: TextStyle(fontSize: 20),),

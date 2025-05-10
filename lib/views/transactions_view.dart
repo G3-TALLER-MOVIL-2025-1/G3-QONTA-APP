@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qonta_app/constants/constants.dart';
-import 'package:qonta_app/model/transaction.dart';
+import 'package:qonta_app/models/transaction.dart';
 
 class TransactionsView extends StatefulWidget {
   // final String title;
@@ -218,7 +218,12 @@ class _MyHomePageState extends State<TransactionsView> {
             ),
             ListTile(
               title: Text('Escanear', style: TextStyle(fontSize: 20)),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(
+                        context,
+                        'scanner',
+                );
+              },
             ),
             ListTile(
               title: Text('Ingreso Manual', style: TextStyle(fontSize: 20)),

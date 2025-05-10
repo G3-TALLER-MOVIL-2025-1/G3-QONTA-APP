@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:qonta_app/constants/constants.dart';
 
-class ExpenseView extends StatefulWidget {
+class ScannerView extends StatefulWidget {
   // final String title;
-  const ExpenseView({super.key});
+  const ScannerView({super.key});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<ExpenseView> {
+class _MyHomePageState extends State<ScannerView> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -66,44 +66,10 @@ class _MyHomePageState extends State<ExpenseView> {
                     ),
                   ],
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: kBackgroundColor,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Ingreso Manual',
-                        style: TextStyle(color: Colors.black, fontSize: 30),
-                      ),
-                      // SizedBox(height: 10.0),
-                      _textFieldAmount(),
-                      SizedBox(height: 10.0),
-                      _textFieldDate(),
-                      SizedBox(height: 10.0),
-                      _textFieldExpense(),
-                      SizedBox(height: 80.0),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, 'main');
-                        },
-                        child: const Text(
-                          'Salir',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+              ]
+              )
+          )
+        ]
       ),
       endDrawer: Drawer(
         shape: RoundedRectangleBorder(
@@ -170,50 +136,6 @@ class _MyHomePageState extends State<ExpenseView> {
         ),
       ),
     );
-  }
-
-  Widget _textFieldAmount() {
-    return _textFieldGeneral(labelText: 'Cantidad', onChanged: (value) {});
-  }
-
-  Widget _textFieldDate() {
-    return _textFieldGeneral(labelText: 'Fecha', onChanged: (value) {});
-  }
-
-  Widget _textFieldExpense() {
-    return _textFieldGeneral(
-      labelText: 'Tipo de Egreso',
-      onChanged: (value) {},
-    );
-  }
 }
 
-class _textFieldGeneral extends StatelessWidget {
-  final String labelText;
-  // final TextInputType keyboardType;
-  final ValueChanged<String>? onChanged;
-  const _textFieldGeneral({
-    required this.labelText,
-    // this.keyboardType,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30.0),
-      decoration: BoxDecoration(
-        color: kFieldColor,
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: TextField(
-        // keyboardType: keyboardType,
-        decoration: InputDecoration(
-          labelText: labelText,
-          labelStyle: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-        onChanged: onChanged,
-      ),
-    );
-  }
 }
