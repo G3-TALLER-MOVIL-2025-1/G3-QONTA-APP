@@ -55,7 +55,7 @@ class WelcomeView extends StatelessWidget{
                     },
                     child: const Text(
                       'Ingresar',
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
                 ),

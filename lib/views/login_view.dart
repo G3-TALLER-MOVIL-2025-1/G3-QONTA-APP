@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:qonta_app/constants/constants.dart';
 
-class LoginView extends StatelessWidget{
+// class LoginView extends StatelessWidget{
+//   const LoginView({super.key});
+
+class LoginView extends StatefulWidget {
+  // final String title;
   const LoginView({super.key});
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+class _MyHomePageState extends State<LoginView>{
 
   @override
   Widget build(BuildContext context) {

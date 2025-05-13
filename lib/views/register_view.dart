@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:qonta_app/constants/constants.dart';
 
-class RegisterView extends StatelessWidget{
+// class RegisterView extends StatelessWidget{
+//   const RegisterView({super.key});
+
+class RegisterView extends StatefulWidget {
+  // final String title;
   const RegisterView({super.key});
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+class _MyHomePageState extends State<RegisterView>{
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +31,7 @@ class RegisterView extends StatelessWidget{
             color: Colors.black.withOpacity(0.5),
           ),
           // Contenido centrado
-          Padding(
+          SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 32.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -112,6 +121,8 @@ class RegisterView extends StatelessWidget{
                     ],
                   )
                 )
+                
+                
               ]
             )
           )

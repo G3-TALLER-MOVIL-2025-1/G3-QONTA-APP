@@ -1,4 +1,6 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:gal/gal.dart';
 import 'package:qonta_app/constants/constants.dart';
 
 class ScannerView extends StatefulWidget {
@@ -9,8 +11,32 @@ class ScannerView extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<ScannerView> {
+class _MyHomePageState extends State<ScannerView> with WidgetsBindingObserver{
+  //Camaras disponibles
+  List<CameraDescription> cameras = [];
+  //Controlador de camara
+  CameraController? cameraController;
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state){
+    super.didChangeAppLifecycleState(state);
+    if( cameraController == null || cameraController?.value.isInitialized == false){
+      return;
+    } 
+    if (state == AppLifecycleState.inactive){
+      cameraController?.dispose();
+    } else if (state == AppLifecycleState.resumed){
+      _setupCameraController();
+    }
+  }
+
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _setupCameraController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +71,7 @@ class _MyHomePageState extends State<ScannerView> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,9 +93,46 @@ class _MyHomePageState extends State<ScannerView> {
                     ),
                   ],
                 ),
+                // Container(
+                //   // margin: EdgeInsets.symmetric(horizontal: 10.0,),
+                //   padding: EdgeInsets.all(90.0),
+                //   decoration: BoxDecoration(
+                //     color: kBackgroundColor,
+                //     borderRadius: BorderRadius.circular(50),
+                //   ),
+                //   child: Column(
+                    
+                //     children: [
+                      // Text("Enfoca la imagen dentro del cuadro",
+                      //  style: TextStyle(
+                      //    fontSize: 25,
+                      //    color: Colors.black,
+                      //  )),
+                      _buildUI(),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     Navigator.pushNamed(context, 'main');
+                      //   },
+                      //   child: const Text(
+                      //     'Salir',
+                      //     style: TextStyle(
+                      //       fontSize: 20,
+                      //       color: Colors.black,
+                      //       fontWeight: FontWeight.bold,
+                      //     ),
+                      //   ),
+                    //   // ),
+                    // ],
+                //   )
+                // )
+                
               ]
               )
-          )
+          ),
+          // Expanded(
+          //   child: _buildUI(),
+          // ),
+          
         ]
       ),
       endDrawer: Drawer(
@@ -136,6 +200,72 @@ class _MyHomePageState extends State<ScannerView> {
         ),
       ),
     );
+}
+
+Future<void> _setupCameraController() async {
+  List<CameraDescription> _cameras = await availableCameras();
+  if (_cameras.isNotEmpty) {
+    setState(() {
+      cameras = _cameras;
+      cameraController = CameraController(_cameras.first, ResolutionPreset.high);
+    });
+    cameraController?.initialize().then((_) {
+      if(!mounted){
+        return;
+      }
+      setState(() {
+        
+      });
+    }).catchError((Object e) {
+      print(e);
+    },
+    );
+  }
+}
+Widget _buildUI(){
+  if(cameraController == null || cameraController?.value.isInitialized == false){
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+  return 
+  // SafeArea(
+  //   child: SizedBox.expand(
+  Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+          color: kBackgroundColor,
+          borderRadius: BorderRadius.circular(10),
+        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 20.0),
+                      Text("Enfoca la imagen dentro del cuadro",
+                       style: TextStyle(
+                         fontSize: 20,
+                         color: Colors.black,
+                       )),
+          SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.30,
+          width: MediaQuery.sizeOf(context).width * 0.70,
+          child: CameraPreview(cameraController!,)
+          ),
+          IconButton(
+           onPressed: () async {
+            XFile picture = await cameraController!.takePicture();
+            Gal.putImage(picture.path,);
+           },
+           iconSize: 100, 
+           icon: const Icon(
+            Icons.camera,
+            color: Colors.red,
+          ))
+        ],
+      )
+      )
+  );
 }
 
 }
