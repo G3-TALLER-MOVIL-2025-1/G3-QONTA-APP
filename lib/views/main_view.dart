@@ -47,8 +47,9 @@ class _MyHomePageState extends State<MainView>{
             // padding: const EdgeInsets.symmetric(horizontal: 100.0),
             padding: const EdgeInsets.all(16.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                const SizedBox(height: 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -160,7 +161,10 @@ class _MyHomePageState extends State<MainView>{
             ListTile(
               title: Text('Perfil', style: TextStyle(fontSize: 20),),
               onTap: () {
-
+                Navigator.pushNamed(
+                        context,
+                        'profile',
+                );
               },
             ),
              ListTile(

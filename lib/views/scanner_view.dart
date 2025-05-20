@@ -158,7 +158,12 @@ class _MyHomePageState extends State<ScannerView> with WidgetsBindingObserver{
             ),
             ListTile(
               title: Text('Perfil', style: TextStyle(fontSize: 20)),
-              onTap: () {},
+              onTap: () {
+                 Navigator.pushNamed(
+                        context,
+                        'profile',
+                );
+              },
             ),
             ListTile(
               title: Text('Escanear', style: TextStyle(fontSize: 20)),

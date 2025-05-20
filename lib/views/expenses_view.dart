@@ -11,7 +11,10 @@ class ExpenseView extends StatefulWidget {
 
 class _MyHomePageState extends State<ExpenseView> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  // final items = ['Soles', 'Dólares'];
+  // String? value;
+  List<String> items = ['Soles', 'Dólares'];
+  String? selectedItem = 'Soles';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,18 +75,60 @@ class _MyHomePageState extends State<ExpenseView> {
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Column(
+                    // crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const Text(
                         'Ingreso Manual',
                         style: TextStyle(color: Colors.black, fontSize: 30),
                       ),
                       // SizedBox(height: 10.0),
+                      // Align(
+                      // alignment: Alignment.centerLeft,
+                      // child: DropdownButton<String>(
+                      //   value: value,
+                      //   iconSize: 36,
+                      //   isExpanded: false,
+                      //   icon: Icon(Icons.arrow_drop_down, color: Colors.black),
+                      //   //isExpanded: true,
+                      //   items: items.map(buildMenuItem).toList(),
+                      //   onChanged: (value) => setState(() => this.value = value),
+                      // )
+                        // child: 
+                        DropdownButton(
+                          hint: Text('Moneda', style: TextStyle(fontSize: 20)),
+                          value: selectedItem,
+                          items: items.map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(item, style: TextStyle(fontSize: 20))
+                          ))
+                          .toList(),
+                          onChanged: (item) => setState(() => selectedItem = item),
+                          ),
+                      // ),
                       _textFieldAmount(),
                       SizedBox(height: 10.0),
                       _textFieldDate(),
                       SizedBox(height: 10.0),
                       _textFieldExpense(),
                       SizedBox(height: 80.0),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                        backgroundColor: kPrimaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        ),
+                        onPressed: () {
+                          // Registrar
+                        },
+                        child: const Text(
+                          'Registrar',
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
+                      ),
+                      Align(
+                      alignment: Alignment(0.0, 1.0),  
+                      child:
                       GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, 'main');
@@ -96,7 +141,7 @@ class _MyHomePageState extends State<ExpenseView> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
+                      ),)
                     ],
                   ),
                 ),
@@ -128,7 +173,12 @@ class _MyHomePageState extends State<ExpenseView> {
             ),
             ListTile(
               title: Text('Perfil', style: TextStyle(fontSize: 20)),
-              onTap: () {},
+              onTap: () {
+                 Navigator.pushNamed(
+                        context,
+                        'profile',
+                );
+              },
             ),
             ListTile(
               title: Text('Escanear', style: TextStyle(fontSize: 20)),
@@ -171,6 +221,14 @@ class _MyHomePageState extends State<ExpenseView> {
       ),
     );
   }
+
+  // DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+  //   value: item,
+  //   child: Text(
+  //     item,
+  //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+  //   ),
+  // );
 
   Widget _textFieldAmount() {
     return _textFieldGeneral(labelText: 'Cantidad', onChanged: (value) {});
