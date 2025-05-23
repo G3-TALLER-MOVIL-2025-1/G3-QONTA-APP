@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:qonta_app/constants/constants.dart';
 import 'package:qonta_app/models/transaction.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../viewmodels/search_viewmodel.dart';
+import 'package:provider/provider.dart';
+import '../utils/user_preferences.dart';
+import '../main.dart';
 
 class TransactionsView extends StatefulWidget {
   // final String title;
@@ -11,90 +16,118 @@ class TransactionsView extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<TransactionsView> {
-  List<Transaction> transactions = getTransactions();
+  // List<Transaction> transactions = getTransactions();
 
-  static List<Transaction> getTransactions() {
-    const data = [
-      {
-        "amount": 120.0,
-        "date": "2025-05-05",
-        "state": 'Egreso'
-      },
-      {
-        "amount": 80.0,
-        "date": "2025-04-25",
-        "state": 'Ingreso'
-      },
-      {
-        "amount": 20.0,
-        "date": "2025-03-16",
-        "state": 'Egreso'
-      },
-      {
-        "amount": 1100.0,
-        "date": "2025-02-20",
-        "state": 'Ingreso'
-      },
-      {
-        "amount": 340.0,
-        "date": "2025-01-01",
-        "state": 'Egreso'
-      },
-      {
-        "amount": 120.0,
-        "date": "2025-05-05",
-        "state": 'Egreso'
-      },
-      {
-        "amount": 80.0,
-        "date": "2025-04-25",
-        "state": 'Ingreso'
-      },
-      {
-        "amount": 20.0,
-        "date": "2025-03-16",
-        "state": 'Egreso'
-      },
-      {
-        "amount": 1100.0,
-        "date": "2025-02-20",
-        "state": 'Ingreso'
-      },
-      {
-        "amount": 340.0,
-        "date": "2025-01-01",
-        "state": 'Egreso'
-      },
-      {
-        "amount": 80.0,
-        "date": "2025-04-25",
-        "state": 'Ingreso'
-      },
-      {
-        "amount": 20.0,
-        "date": "2025-03-16",
-        "state": 'Egreso'
-      },
-      {
-        "amount": 1100.0,
-        "date": "2025-02-20",
-        "state": 'Ingreso'
-      },
-      {
-        "amount": 340.0,
-        "date": "2025-01-01",
-        "state": 'Egreso'
-      },
+  // static List<Transaction> getTransactions() {
+    // const data = [
+    //   {
+    //     "amount": 120.0,
+    //     "date": "2025-05-05",
+    //     "state": 'Egreso'
+    //   },
+    //   {
+    //     "amount": 80.0,
+    //     "date": "2025-04-25",
+    //     "state": 'Ingreso'
+    //   },
+    //   {
+    //     "amount": 20.0,
+    //     "date": "2025-03-16",
+    //     "state": 'Egreso'
+    //   },
+    //   {
+    //     "amount": 1100.0,
+    //     "date": "2025-02-20",
+    //     "state": 'Ingreso'
+    //   },
+    //   {
+    //     "amount": 340.0,
+    //     "date": "2025-01-01",
+    //     "state": 'Egreso'
+    //   },
+    //   {
+    //     "amount": 120.0,
+    //     "date": "2025-05-05",
+    //     "state": 'Egreso'
+    //   },
+    //   {
+    //     "amount": 80.0,
+    //     "date": "2025-04-25",
+    //     "state": 'Ingreso'
+    //   },
+    //   {
+    //     "amount": 20.0,
+    //     "date": "2025-03-16",
+    //     "state": 'Egreso'
+    //   },
+    //   {
+    //     "amount": 1100.0,
+    //     "date": "2025-02-20",
+    //     "state": 'Ingreso'
+    //   },
+    //   {
+    //     "amount": 340.0,
+    //     "date": "2025-01-01",
+    //     "state": 'Egreso'
+    //   },
+    //   {
+    //     "amount": 80.0,
+    //     "date": "2025-04-25",
+    //     "state": 'Ingreso'
+    //   },
+    //   {
+    //     "amount": 20.0,
+    //     "date": "2025-03-16",
+    //     "state": 'Egreso'
+    //   },
+    //   {
+    //     "amount": 1100.0,
+    //     "date": "2025-02-20",
+    //     "state": 'Ingreso'
+    //   },
+    //   {
+    //     "amount": 340.0,
+    //     "date": "2025-01-01",
+    //     "state": 'Egreso'
+    //   },
       
-    ];
-    return data.map<Transaction>(Transaction.fromJson).toList();
-  }
-
+    // ];
+    // const data = [];
+    // return data.map<Transaction>(Transaction.fromJson).toList();
+  // }
+  
+  
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  static int? usersid;
+  // @override
+  // void initState() {
+  //   name();
+  //   super.initState();
+  // }
+  // @override
+  // void initState() {
+  //   WidgetsBinding.instance.addPostFrameCallback((_) async {
+  //   // await this.updateUI();
+  //   name();  
+  //   // setState(() { });        
+  // });
+  // }
+  // void getUser() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     usersid = prefs.getInt('usersid');  
+  //     print('set'+usersid.toString());
+  //   });
+  // }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    usersid = UserPreferences.instance.preferences!.getInt('usersid');
+    // name();
+    print('wuidget'+usersid.toString());
+    return ChangeNotifierProvider(
+      create: (_) => SearchViewmodel()..loadTransactions(usersid),
+      child: Consumer<SearchViewmodel>(
+      builder: (context, viewModel, _) => Scaffold(
       // appBar: AppBar(backgroundColor: Colors.transparent,
       //   elevation: 0.0,),
       key: _scaffoldKey,
@@ -181,9 +214,8 @@ class _MyHomePageState extends State<TransactionsView> {
                 //   ),
                 //   child: buildTransactions(transactions),
                 // )
-                Expanded(
-                  child: buildTransactions(transactions),
-
+                viewModel.isLoading ? const CircularProgressIndicator() : Expanded(
+                  child: buildTransactions(viewModel.all),
                   ),
                  
               ]
@@ -260,7 +292,8 @@ class _MyHomePageState extends State<TransactionsView> {
           ],
         ),
       ),
-    );
+    ) ), );
+
   }
   Widget buildTransactions(List<Transaction> transactions) => ListView.builder(
     itemCount: transactions.length,
@@ -278,14 +311,14 @@ class _MyHomePageState extends State<TransactionsView> {
             ),
             ),
           Text(
-            transaction.date.toString(),
+            transaction.category.toString(),
             style: TextStyle(
               color: Colors.black,
               fontSize: 30,
             ),
             ),
           Text(
-            transaction.state,
+            transaction.description,
             style: TextStyle(
               color: Colors.black,
               fontSize: 30,

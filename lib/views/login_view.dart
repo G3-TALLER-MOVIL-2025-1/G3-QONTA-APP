@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:qonta_app/constants/constants.dart';
+import 'package:qonta_app/views/main_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../viewmodels/login_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 // class LoginView extends StatelessWidget{
 //   const LoginView({super.key});
@@ -12,10 +16,18 @@ class LoginView extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 class _MyHomePageState extends State<LoginView>{
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider(
+      create: (_) => LoginViewModel(),
+      child: Consumer<LoginViewModel>(
+      builder: (context, viewModel, _) => Scaffold(
       body: Stack(
         children: [
           // Imagen de fondo
@@ -60,30 +72,150 @@ class _MyHomePageState extends State<LoginView>{
                          color: Colors.black,
                        )),
                       
-                      SizedBox(height: 10.0),
-                      _textFieldEmail(),
-                      SizedBox(height: 10.0),
-                      _textFieldPassword(),
-                      SizedBox(height: 30.0),
-                      
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                        backgroundColor: kPrimaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                      //   const Text(
+                      //   'Iniciar Sesión',
+                      //   style: TextStyle(
+                      //   fontSize: 28,
+                      //   fontWeight: FontWeight.bold,
+                      //   color: Colors.indigo,
+                      //   ),
+                      //  ),
+
+                      const SizedBox(height: 20),
+
+                        TextFormField(
+                        controller: _emailController,
+                        decoration:  InputDecoration(
+                        labelText: 'Correo electrónico',
+                        labelStyle: TextStyle(
+                         color: Colors.white,
+                        fontSize: 20,
                         ),
+                        prefixIcon: Icon(Icons.email),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
                         ),
-                        onPressed: () {
-                          Navigator.pushNamed(
-                          context,
-                          'main',
-                        );
+                        fillColor: kFieldColor,
+                        filled: true,
+                        ),
+
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Ingrese su correo';
+                          }
+                          final emailRegex = RegExp(r'^\S+@\S+\.\S+$');
+                          if (!emailRegex.hasMatch(value)) {
+                            return 'Ingrese un correo válido';
+                          }
+                          return null;
                         },
-                        child: const Text(
-                          'Ingresar',
-                          style: TextStyle(fontSize: 18, color: Colors.white),
-                        ),
+
+                      onChanged: (val) => viewModel.email = val,
+
                       ),
+
+                        const SizedBox(height: 20),
+
+                        TextFormField(
+                        controller: _passwordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                        labelText: 'Contraseña',
+                        prefixIcon: Icon(Icons.lock),
+                        labelStyle: TextStyle(
+                        color: Colors.white,
+                        // borderRadius: BorderRadius.circular(25),
+                        fontSize: 20,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.00),
+                        ),
+                        // fillColor: kFieldColor,
+                        fillColor: kFieldColor,
+                        filled: true,
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Ingrese su contraseña';
+                          }
+                          if (value.length < 4) {
+                            return 'La contraseña debe tener al menos 4 caracteres';
+                          }
+                          return null;
+                        },
+
+                      onChanged: (val) => viewModel.password = val,
+                      ),
+
+                      const SizedBox(height: 30),
+                      viewModel.isLoading ? const CircularProgressIndicator() : ElevatedButton(
+                           style: ElevatedButton.styleFrom(
+                            backgroundColor: kPrimaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                        ),
+                          onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                          final success = await viewModel.validateLogin();
+                          if (success) {
+                            SharedPreferences pref = await SharedPreferences.getInstance();
+                            int? usersid = pref.getInt('usersid');
+                            print('Navigator: '+usersid.toString());
+                            Navigator.pushReplacement(
+                            context,
+
+                            MaterialPageRoute(
+                            builder: (_) => const
+                            MainView(),
+                            ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content:
+                              Text('Credenciales inválidas')),
+                            );
+                          }
+                      }
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal:
+                        32, vertical: 12),
+                        child: Text('Ingresar',  style: TextStyle(fontSize: 18, color: Colors.white),),
+                      ),
+                      ),
+                      ],
+                      ),
+                      ),
+                      // SizedBox(height: 10.0),
+                      // _textFieldEmail(),
+                      // SizedBox(height: 10.0),
+                      // _textFieldPassword(),
+                      // SizedBox(height: 30.0),
+                      
+                      // ElevatedButton(
+                      //   style: ElevatedButton.styleFrom(
+                      //   backgroundColor: kPrimaryColor,
+                      //   shape: RoundedRectangleBorder(
+                      //     borderRadius: BorderRadius.circular(25),
+                      //   ),
+                      //   ),
+                      //   onPressed: () {
+                      //     Navigator.pushNamed(
+                      //     context,
+                      //     'main',
+                      //   );
+                      //   },
+                      //   child: const Text(
+                      //     'Ingresar',
+                      //     style: TextStyle(fontSize: 18, color: Colors.white),
+                      //   ),
+                      // ),
                       Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -117,7 +249,7 @@ class _MyHomePageState extends State<LoginView>{
           )
         ],  
       )
-    );
+    ) ));
   }
 
 Widget _textFieldEmail() {
@@ -157,6 +289,7 @@ class _textFieldGeneral extends StatelessWidget {
       borderRadius: BorderRadius.circular(25),
     ),
     child: TextField(
+
       // keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: labelText,

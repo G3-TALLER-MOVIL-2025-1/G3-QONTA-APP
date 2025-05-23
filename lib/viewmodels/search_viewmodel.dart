@@ -6,15 +6,28 @@ class SearchViewmodel extends ChangeNotifier {
   final ApiService _apiService = ApiService();
   List<Transaction> all = [];
   List<Transaction> filtered = [];
-  bool isLoading = true;
+  bool isLoading = false;
 
-  Future<void> loadTransactions() async {
+  Future<void> fetch(int? usersid) async {
+    all = await _apiService.fetchTransactions(usersid);
+    }
+
+  Future<void> loadTransactions(int? usersid) async {
     isLoading = true;
     notifyListeners();
     try{
-      all = await _apiService.fetchTransactions();
+      print("load"+usersid.toString());
+      // all = await _apiService.fetchTransactions(usersid);
+      await fetch(usersid);
+      print("abcde");
+      print(all);
+      print(all[0].amount);
+      print(all[0].category);
+      print(all[0].description);
       filtered = all;
-    } catch(_) {
+    } catch(e) {
+      print(e);
+      print("asfsdafds");
       filtered = [];
     }
     isLoading = false;

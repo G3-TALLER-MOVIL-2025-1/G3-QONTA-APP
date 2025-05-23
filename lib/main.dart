@@ -3,10 +3,11 @@ import 'package:qonta_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:qonta_app/config/routes/routes_config.dart';
 import 'package:flutter/services.dart';
+import '../utils/user_preferences.dart';
 
-void main() {
+void main() async {
    WidgetsFlutterBinding.ensureInitialized();
-
+  await UserPreferences.instance.init();
   // Cambiar color de la barra de estado
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: kPrimaryColor, // tu color verde, por ejemplo

@@ -1,24 +1,37 @@
 class Transaction {
-  final double amount;
-  final String date;
-  final String state;
+  final String amount;
+  final String category;
+  final String description;
 
   
 
+  // const Transaction({
+  //   required this.amount,
+  //   required this.category,
+  //   required this.description,
+  // });
   const Transaction({
     required this.amount,
-    required this.date,
-    required this.state,
+    required this.category,
+    required this.description,
   });
-
-  static Transaction fromJson(json) => Transaction(
-    // amount: double.parse(json["amount"]),
-    // date: DateTime.parse(json["date"]),
-    // state: json["state"],
-    amount: json["amount"],
-    date: json["date"],
-    state: json["state"],
-  );
+  factory Transaction.fromJson(Map<String, dynamic> json){
+      return Transaction(
+      amount: json['amount'] ?? '',
+      category: json['categoryname'] ?? '',
+      description: json['description'] ?? '',
+      // name: json['name'] ?? '',
+      // lastname: json['lastname'] ?? '',      
+    );
+  }
+  // static Transaction fromJson(json) => Transaction(
+  //   // amount: double.parse(json["amount"]),
+  //   // date: DateTime.parse(json["date"]),
+  //   // state: json["state"],
+  //   amount: json["amount"],
+  //   category: json["categoryname"],
+  //   description: json["description"],
+  // );
   // static Transaction fromJson(json) { 
   //   var datetime = DateTime.parse(json["date"]);
   //   return Transaction(
