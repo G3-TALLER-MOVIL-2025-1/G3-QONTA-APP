@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qonta_app/constants/constants.dart';
-
+import 'package:provider/provider.dart';
+import '../viewmodels/register_viewmodel.dart';
+import 'package:qonta_app/views/main_view.dart';
 class ExpenseView extends StatefulWidget {
   // final String title;
   const ExpenseView({super.key});
@@ -13,11 +15,18 @@ class _MyHomePageState extends State<ExpenseView> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   // final items = ['Soles', 'Dólares'];
   // String? value;
+  final _formKey = GlobalKey<FormState>();
+  final _amountController = TextEditingController();
+  final _categoryController = TextEditingController();
+  final _descriptionController = TextEditingController();
   List<String> items = ['Soles', 'Dólares'];
   String? selectedItem = 'Soles';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+     return ChangeNotifierProvider(
+      create: (_) => RegisterViewModel(),
+      child: Consumer<RegisterViewModel>(
+      builder: (context, viewModel, _) => Scaffold(
       // appBar: AppBar(backgroundColor: Colors.transparent,
       //   elevation: 0.0,),
       key: _scaffoldKey,
@@ -42,13 +51,18 @@ class _MyHomePageState extends State<ExpenseView> {
             ),
           ),
           const SizedBox(height: 40),
-
-          Padding(
-            // padding: const EdgeInsets.symmetric(horizontal: 100.0),
-            padding: const EdgeInsets.all(16.0),
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+          // Padding(
+          //   // padding: const EdgeInsets.symmetric(horizontal: 100.0),
+          //   padding: const EdgeInsets.all(16.0),
+          //   child: Column(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+              const SizedBox(height: 40),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -105,12 +119,127 @@ class _MyHomePageState extends State<ExpenseView> {
                           onChanged: (item) => setState(() => selectedItem = item),
                           ),
                       // ),
-                      _textFieldAmount(),
-                      SizedBox(height: 10.0),
-                      _textFieldDate(),
-                      SizedBox(height: 10.0),
-                      _textFieldExpense(),
-                      SizedBox(height: 80.0),
+
+                      // _textFieldAmount(),
+                      // SizedBox(height: 10.0),
+                      // _textFieldDate(),
+                      // SizedBox(height: 10.0),
+                      // _textFieldExpense(),
+                      // SizedBox(height: 80.0),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                    
+
+                      const SizedBox(height: 20),
+                        TextFormField(
+                        controller: _amountController,
+                         style: TextStyle(color: Colors.black,
+                        fontSize: 20
+                        ),
+                        decoration:  InputDecoration(
+                        labelText: 'Cantidad',
+                        labelStyle: TextStyle(
+                         color: Colors.white,
+                        fontSize: 20,
+                        ),
+                        prefixIcon: Icon(Icons.email),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+                        fillColor: kFieldColor,
+                        filled: true,
+                        ),
+
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Ingrese la cantidad';
+                          }
+                          // final emailRegex = RegExp(r'^\S+@\S+\.\S+$');
+                          // if (!emailRegex.hasMatch(value)) {
+                          //   return 'Ingrese un correo válido';
+                          // }
+                          return null;
+                        },
+
+                      onChanged: (val) => viewModel.amount = val,
+
+                      ),
+
+                        const SizedBox(height: 20),
+                        TextFormField(
+                        controller: _categoryController,
+                         style: TextStyle(color: Colors.black,
+                        fontSize: 20
+                        ),
+                        decoration:  InputDecoration(
+                        labelText: 'Categoria',
+                        labelStyle: TextStyle(
+                         color: Colors.white,
+                        fontSize: 20,
+                        ),
+                        prefixIcon: Icon(Icons.email),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+                        fillColor: kFieldColor,
+                        filled: true,
+                        ),
+
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Ingrese categoria';
+                          }
+                          // final emailRegex = RegExp(r'^\S+@\S+\.\S+$');
+                          // if (!emailRegex.hasMatch(value)) {
+                          //   return 'Ingrese un correo válido';
+                          // }
+                          return null;
+                        },
+
+                      onChanged: (val) => viewModel.categoryname = val,
+
+                      ),
+
+                        const SizedBox(height: 20),
+                        TextFormField(
+                        controller: _descriptionController,
+                         style: TextStyle(color: Colors.black,
+                        fontSize: 20
+                        ),
+                        decoration:  InputDecoration(
+                        labelText: 'Descripcion',
+                        labelStyle: TextStyle(
+                         color: Colors.white,
+                        fontSize: 20,
+                        ),
+                        prefixIcon: Icon(Icons.email),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+                        fillColor: kFieldColor,
+                        filled: true,
+                        ),
+
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Ingrese descripcion';
+                          }
+                          // final emailRegex = RegExp(r'^\S+@\S+\.\S+$');
+                          // if (!emailRegex.hasMatch(value)) {
+                          //   return 'Ingrese un correo válido';
+                          // }
+                          return null;
+                        },
+
+                      onChanged: (val) => viewModel.description = val,
+
+                      ),
+
+                        const SizedBox(height: 20),
+
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                         backgroundColor: kPrimaryColor,
@@ -118,14 +247,39 @@ class _MyHomePageState extends State<ExpenseView> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                         ),
-                        onPressed: () {
-                          // Registrar
-                        },
+                         onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                          final success = await viewModel.saveExpense();
+                          if (success != 0) {
+                            // SharedPreferences pref = await SharedPreferences.getInstance();
+                            // UserPreferences.instance.preferences!.setInt('usersid', success);
+                            // pref.setInt('usersid', success);
+                            // print('Navigator: '+usersid.toString());
+                            Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                            builder: (_) => const
+                            MainView(),
+                            ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content:
+                              Text('Usuario existente')),
+                            );
+                          }
+                      }
+                      },
                         child: const Text(
                           'Registrar',
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
+                      )
+                        ]
+                        )
                       ),
+
+
                       Align(
                       alignment: Alignment(0.0, 1.0),  
                       child:
@@ -219,7 +373,9 @@ class _MyHomePageState extends State<ExpenseView> {
           ],
         ),
       ),
-    );
+    )
+      )
+     );
   }
 
   // DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(

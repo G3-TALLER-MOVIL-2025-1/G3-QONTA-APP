@@ -90,10 +90,13 @@ class _MyHomePageState extends State<LoginView>{
 
                         TextFormField(
                         controller: _emailController,
+                        style: TextStyle(color: Colors.black,
+                        fontSize: 20
+                        ),
                         decoration:  InputDecoration(
                         labelText: 'Correo electrónico',
                         labelStyle: TextStyle(
-                         color: Colors.white,
+                         color: Colors.black,
                         fontSize: 20,
                         ),
                         prefixIcon: Icon(Icons.email),
@@ -123,12 +126,15 @@ class _MyHomePageState extends State<LoginView>{
 
                         TextFormField(
                         controller: _passwordController,
+                         style: TextStyle(color: Colors.black,
+                        fontSize: 20
+                        ),
                         obscureText: true,
                         decoration: InputDecoration(
                         labelText: 'Contraseña',
                         prefixIcon: Icon(Icons.lock),
                         labelStyle: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         // borderRadius: BorderRadius.circular(25),
                         fontSize: 20,
                         ),

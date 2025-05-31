@@ -23,7 +23,7 @@ class LoginViewModel with ChangeNotifier {
       await fetchUsers();
       final user = _usuarios.firstWhere(
         (u) => u.email == email && u.password == password,
-        orElse: () => User(usersid: 0, email: '', password: ''),
+        orElse: () => User(usersid: 0, email: '', password: '',name: '', lastname: ''),
       );
       _isLoading = false;
       notifyListeners();

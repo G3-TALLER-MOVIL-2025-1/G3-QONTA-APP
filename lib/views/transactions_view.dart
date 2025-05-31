@@ -179,8 +179,7 @@ class _MyHomePageState extends State<TransactionsView> {
                   ],
                 ),
                 const SizedBox(height: 40),
-               
-                Row(
+                 Row(
                     
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -207,6 +206,7 @@ class _MyHomePageState extends State<TransactionsView> {
                       ),
                   ],
                 ),
+                
                 // Container(
                 //   decoration: BoxDecoration(
                 //     color: kBackgroundColor,
@@ -295,7 +295,16 @@ class _MyHomePageState extends State<TransactionsView> {
     ) ), );
 
   }
-  Widget buildTransactions(List<Transaction> transactions) => ListView.builder(
+  Widget buildTransactions(List<Transaction> transactions) => 
+  
+    Container( 
+    decoration: BoxDecoration(
+      color: kBackgroundColor,
+      borderRadius: BorderRadius.circular(50),
+    ),  
+    
+    child: ListView.builder(
+      
     itemCount: transactions.length,
     itemBuilder: (context, index) {
       final transaction = transactions[index];
@@ -328,5 +337,7 @@ class _MyHomePageState extends State<TransactionsView> {
         )
       );
     },
-  );
+  )
+    
+    );
 }

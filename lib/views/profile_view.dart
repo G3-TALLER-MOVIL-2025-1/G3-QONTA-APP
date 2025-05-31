@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:qonta_app/constants/constants.dart';
+import '../utils/user_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../viewmodels/register_viewmodel.dart';
+import 'package:provider/provider.dart';
+import '../main.dart';
+import '../models/user.dart';
+
 
 // class MainView extends StatelessWidget{
 //   const MainView({super.key});
@@ -13,10 +20,16 @@ class ProfileView extends StatefulWidget {
 class _MyHomePageState extends State<ProfileView>{
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  static int? usersid;
+  static User? users;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    usersid = UserPreferences.instance.preferences!.getInt('usersid');
+
+    return ChangeNotifierProvider(
+      create: (_) => RegisterViewModel()..fetchUser(usersid),
+      child: Consumer<RegisterViewModel>(
+      builder: (context, viewModel, _) => Scaffold(
       // appBar: AppBar(backgroundColor: Colors.transparent,
       //   elevation: 0.0,),
       key: _scaffoldKey,
@@ -70,7 +83,7 @@ class _MyHomePageState extends State<ProfileView>{
                   ]
                 ),
                 // const SizedBox(height: 40),
-                Container(
+                 viewModel.isLoading ? const CircularProgressIndicator() : Container(
                   // margin: EdgeInsets.symmetric(horizontal: 10.0,),
                   padding: EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
@@ -82,11 +95,11 @@ class _MyHomePageState extends State<ProfileView>{
                     children: [
                      ListTile(
                       leading: Icon(Icons.account_circle, size: 80,),
-                      title: Text('Juan Diego Flores Martinez',style: TextStyle(
+                      title: Text("${viewModel.usuarios[0].name} ${viewModel.usuarios[0].lastname} ",style: TextStyle(
                          fontSize: 25,
                          color: Colors.black,
                        )),
-                      subtitle: Text('juandmar@gmail.com',style: TextStyle(
+                      subtitle: Text('${viewModel.usuarios[0].email}',style: TextStyle(
                          fontSize: 20,
                          color: Colors.black,
                        )),
@@ -215,7 +228,9 @@ class _MyHomePageState extends State<ProfileView>{
           ]
         )
       ),
-    );
+    )
+      ))
+    ;
   }
 
 
