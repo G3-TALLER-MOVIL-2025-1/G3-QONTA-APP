@@ -4,6 +4,7 @@ import '../models/user.dart';
 import '../utils/user_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:qonta_app/views/main_view.dart';
+import 'package:qonta_app/views/login_view.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/register_viewmodel.dart';
 
@@ -101,7 +102,9 @@ class _MyHomePageState extends State<RegisterView>{
                       //  ),
 
                       const SizedBox(height: 20),
-                        TextFormField(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                         controller: _nameController,
                          style: TextStyle(color: Colors.black,
                         fontSize: 20
@@ -134,9 +137,11 @@ class _MyHomePageState extends State<RegisterView>{
                       onChanged: (val) => viewModel.name = val,
 
                       ),
-
+                      ),
                         const SizedBox(height: 20),
-                        TextFormField(
+                        Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                         controller: _lastnameController,
                          style: TextStyle(color: Colors.black,
                         fontSize: 20
@@ -169,9 +174,12 @@ class _MyHomePageState extends State<RegisterView>{
                       onChanged: (val) => viewModel.lastname = val,
 
                       ),
+                        ),
 
                         const SizedBox(height: 20),
-                        TextFormField(
+                        Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                         controller: _emailController,
                          style: TextStyle(color: Colors.black,
                         fontSize: 20
@@ -204,10 +212,11 @@ class _MyHomePageState extends State<RegisterView>{
                       onChanged: (val) => viewModel.em = val,
 
                       ),
-
+                        ),
                         const SizedBox(height: 20),
-
-                        TextFormField(
+                        Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                         controller: _passwordController,
                          style: TextStyle(color: Colors.black,
                         fontSize: 20
@@ -240,6 +249,7 @@ class _MyHomePageState extends State<RegisterView>{
 
                       onChanged: (val) => viewModel.pass = val,
                       ),
+                        ),
                       SizedBox(height: 10.0),
                       ListTile(
                         leading: Icon(Icons.check_box_outlined),
@@ -264,13 +274,78 @@ class _MyHomePageState extends State<RegisterView>{
                             UserPreferences.instance.preferences!.setInt('usersid', success);
                             // pref.setInt('usersid', success);
                             // print('Navigator: '+usersid.toString());
-                            Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                            builder: (_) => const
-                            MainView(),
+                            // Navigator.pushReplacement(
+                            // context,
+                            // MaterialPageRoute(
+                            // builder: (_) => const
+                            // MainView(),
+                            // ),
+                            // );
+                             showDialog(
+                  //if set to true allow to close popup by tapping out of the popup
+                  barrierDismissible: false, 
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                             backgroundColor: kBackgroundColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(32.0))),
+                            contentPadding: EdgeInsets.all(10.0),
+                            content: Stack(
+                            children: <Widget>[
+                            Container(
+                            width: 200,
+                            height: 200,
+                            child:Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text("!Usuario registrado!", style:TextStyle(fontSize: 30.0,color: Colors.black)),
+                              )//
                             ),
-                            );
+                          ),
+                        //   InkWell(
+                        //   child: Container(
+                        //     padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                        //     decoration: BoxDecoration(
+                        //       color:kBackgroundColor,
+                        //       borderRadius: BorderRadius.only(
+                        //       bottomLeft: Radius.circular(32.0),
+                        //       bottomRight: Radius.circular(32.0)),
+                        //     ),
+                        //     child:  Text(
+                        //     "OK",
+                        //       style: TextStyle(color: Colors.black,fontSize: 25.0),
+                        //       textAlign: TextAlign.center,
+                        //     ),
+                        //   ),
+                        //   onTap:(){
+                        //     Navigator.pushReplacement(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //     builder: (_) => const
+                        //     LoginView(),
+                        //     ),
+                        //     );
+                        //   },
+                        // ),
+                             Positioned(
+                              top: 0.0,
+                              right: 0.0,
+                              child: FloatingActionButton(
+                                child: Image.asset("assets/images/cross.png"),
+                                onPressed: (){
+                                Navigator.pop(context);
+                                },
+                                // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
+                                backgroundColor: kBackgroundColor,
+                                mini: true,
+                                elevation: 0.0,
+                              ),
+                            ), 
+                            ]
+                          )
+                          )
+                          );
+
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content:

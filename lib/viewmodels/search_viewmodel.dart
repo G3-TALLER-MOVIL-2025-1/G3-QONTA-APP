@@ -23,7 +23,8 @@ class SearchViewmodel extends ChangeNotifier {
       print(all);
       print(all[0].amount);
       print(all[0].category);
-      print(all[0].description);
+      print(all[0].date);
+      // print(all[0].description);
       filtered = all;
     } catch(e) {
       print(e);

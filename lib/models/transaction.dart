@@ -2,7 +2,7 @@ class Transaction {
   final String amount;
   final String category;
   final String description;
-
+  String? date = "";
   
 
   // const Transaction({
@@ -10,17 +10,18 @@ class Transaction {
   //   required this.category,
   //   required this.description,
   // });
-  const Transaction({
+  Transaction({
     required this.amount,
     required this.category,
     required this.description,
+    this.date = 'afds',
   });
   factory Transaction.fromJson(Map<String, dynamic> json){
       return Transaction(
       amount: json['amount'] ?? '',
       category: json['categoryname'] ?? '',
       description: json['description'] ?? '',
-      // name: json['name'] ?? '',
+      date: json['date'] ?? '',
       // lastname: json['lastname'] ?? '',      
     );
   }

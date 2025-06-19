@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:qonta_app/models/transaction.dart';
+import 'package:qonta_app/models/profile.dart';
 import '../models/user.dart';
 import '../utils/user_preferences.dart';
 class ApiService {
@@ -114,5 +115,20 @@ class ApiService {
     }
     } 
   
-
+    Future<List<ProfileData>> fetchProfileData(int? usersid) async {
+    final response = await http.post(Uri.parse(
+    'http://10.0.2.2:5000/api/expenses/getProfileData'),
+    headers: {
+      "Accept": "application/json",
+      "content-type":"application/json"
+      },
+      body: jsonEncode(<String, String>{'usersid': usersid.toString()}),
+    );
+    if (response.statusCode == 200) {
+      List jsonData = json.decode(response.body);
+      return jsonData.map((e) => ProfileData.fromJson(e)).toList();
+    } else {
+      throw Exception('Error al cargar usuarios');
+    }
+  }
 }

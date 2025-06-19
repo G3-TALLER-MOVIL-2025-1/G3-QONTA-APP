@@ -70,12 +70,17 @@ class _MyHomePageState extends State<MainView>{
                   ]
                 ),
                 // const SizedBox(height: 40),
-                Container(
+                Expanded(
+                child:
+                Padding(
+            // padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                padding: const EdgeInsets.all(0.0),
+                child: Container(
                   // margin: EdgeInsets.symmetric(horizontal: 10.0,),
-                  padding: EdgeInsets.all(90.0),
+                  padding: EdgeInsets.all(45.0),
                   decoration: BoxDecoration(
                     color: kBackgroundColor,
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(25),
                   ),
                   child: Column(
                     
@@ -110,6 +115,14 @@ class _MyHomePageState extends State<MainView>{
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
+                       IconButton(
+                        icon: Image.asset("assets/images/ocr.png",
+                        height: 50,
+                        color: null
+                        ),
+                        onPressed: () {
+                          // do something here
+                        }),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                         backgroundColor: kPrimaryColor,
@@ -128,9 +141,21 @@ class _MyHomePageState extends State<MainView>{
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
+
+                      IconButton(
+                        icon: Image.asset("assets/images/register.png",
+                        height: 50,
+                        color: null
+                        ),
+                        onPressed: () {
+                          // do something here
+                        }),
+
+
                     ],
                   )
                 )
+                              )          )
               ]
             )
           )

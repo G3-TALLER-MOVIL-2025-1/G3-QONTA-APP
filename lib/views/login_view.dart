@@ -87,8 +87,9 @@ class _MyHomePageState extends State<LoginView>{
                       //  ),
 
                       const SizedBox(height: 20),
-
-                        TextFormField(
+                        Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                         controller: _emailController,
                         style: TextStyle(color: Colors.black,
                         fontSize: 20
@@ -121,10 +122,11 @@ class _MyHomePageState extends State<LoginView>{
                       onChanged: (val) => viewModel.email = val,
 
                       ),
-
+                        ),
                         const SizedBox(height: 20),
-
-                        TextFormField(
+                        Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                         controller: _passwordController,
                          style: TextStyle(color: Colors.black,
                         fontSize: 20
@@ -157,6 +159,7 @@ class _MyHomePageState extends State<LoginView>{
 
                       onChanged: (val) => viewModel.password = val,
                       ),
+                        ),
 
                       const SizedBox(height: 30),
                       viewModel.isLoading ? const CircularProgressIndicator() : ElevatedButton(
@@ -191,7 +194,7 @@ class _MyHomePageState extends State<LoginView>{
                       },
                       child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal:
-                        32, vertical: 12),
+                        10, vertical: 12),
                         child: Text('Ingresar',  style: TextStyle(fontSize: 18, color: Colors.white),),
                       ),
                       ),

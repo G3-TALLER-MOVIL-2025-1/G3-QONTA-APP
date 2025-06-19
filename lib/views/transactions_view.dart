@@ -178,9 +178,95 @@ class _MyHomePageState extends State<TransactionsView> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
-                 Row(
+                Expanded(
+                child: 
+                Container(
+                decoration: BoxDecoration(
+                  color: kBackgroundColor,
+                  borderRadius: BorderRadius.circular(25),
+                ),  
+                child: Column(
+                children: [  
+                SizedBox(height: 15),
+                Padding(
+            // padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Row(
                     
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                    Text(
+                      "Historial",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 40,
+                      ),
+                      ),
+                    IconButton(
+                        icon: Image.asset("assets/images/pdf.png",
+                        height: 50,
+                        color: null
+                        ),
+                        onPressed: () {
+                          // do something here
+                          
+                          showDialog(
+                  //if set to true allow to close popup by tapping out of the popup
+                  barrierDismissible: false, 
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                             backgroundColor: kBackgroundColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(32.0))),
+                            contentPadding: EdgeInsets.all(10.0),
+                            content: Stack(
+                            children: <Widget>[
+                            Container(
+                            width: 200,
+                            height: 200,
+                            child:Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text("¡Archivo Exportado!", style:TextStyle(fontSize: 30.0,color: Colors.black)),
+                              )//
+                            ),
+                          ),
+                             Positioned(
+                              top: 0.0,
+                              right: 0.0,
+                              child: FloatingActionButton(
+                                child: Image.asset("assets/images/cross.png"),
+                                onPressed: (){
+                                Navigator.pop(context);
+                                },
+                                // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
+                                backgroundColor: kBackgroundColor,
+                                mini: true,
+                                elevation: 0.0,
+                              ),
+                            ), 
+                            ]
+                          )
+                          )
+                          );
+                        }),
+                  ],
+                ),
+                ),
+                Padding(
+            // padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: 
+                    Container(
+                      padding: EdgeInsets.all(5.0),
+                      decoration: BoxDecoration(
+                      color: kFieldColor,
+                      // borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.only(bottomLeft: Radius.zero, bottomRight: Radius.zero,
+                      topLeft: Radius.circular(25), topRight: Radius.circular(25))
+                    ),  
+                    child:
+                    Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                     Text(
@@ -198,15 +284,15 @@ class _MyHomePageState extends State<TransactionsView> {
                       ),
                       ),
                     Text(
-                      "Estado",
+                      "Categ",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 30,
                       ),
                       ),
                   ],
+                ),)
                 ),
-                
                 // Container(
                 //   decoration: BoxDecoration(
                 //     color: kBackgroundColor,
@@ -214,10 +300,15 @@ class _MyHomePageState extends State<TransactionsView> {
                 //   ),
                 //   child: buildTransactions(transactions),
                 // )
+
                 viewModel.isLoading ? const CircularProgressIndicator() : Expanded(
                   child: buildTransactions(viewModel.all),
+                  
                   ),
-                 
+                ]),)
+                )
+
+
               ]
             ),
            ),
@@ -297,10 +388,17 @@ class _MyHomePageState extends State<TransactionsView> {
   }
   Widget buildTransactions(List<Transaction> transactions) => 
   
-    Container( 
+    Padding(
+            // padding: const EdgeInsets.symmetric(horizontal: 100.0),
+            // padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15, top: 0),
+    child: Container( 
+    padding: EdgeInsets.all(5.0),
     decoration: BoxDecoration(
-      color: kBackgroundColor,
-      borderRadius: BorderRadius.circular(50),
+      color: kFieldColor,
+      // borderRadius: BorderRadius.circular(25),
+      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(25), bottomRight: Radius.circular(25),
+      topLeft: Radius.zero, topRight: Radius.zero)
     ),  
     
     child: ListView.builder(
@@ -309,35 +407,46 @@ class _MyHomePageState extends State<TransactionsView> {
     itemBuilder: (context, index) {
       final transaction = transactions[index];
       return Card(
-        child: Row(
+        elevation: 0,
+        color: Colors.transparent,
+        child: 
+        ColoredBox(
+        color: kFieldColor, // <-- Red color provided to below Row
+        child: 
+          Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
           Text(
-            transaction.amount.toString(),
+            "${transaction.amount.toString()} S/.",
             style: TextStyle(
               color: Colors.black,
-              fontSize: 30,
+              fontSize: 20,
+              fontWeight: FontWeight.bold
             ),
             ),
           Text(
-            transaction.category.toString(),
+            transaction.date.toString(),
             style: TextStyle(
               color: Colors.black,
-              fontSize: 30,
+              fontSize: 20,
+              fontWeight: FontWeight.bold
             ),
             ),
           Text(
-            transaction.description,
+            // transaction.description,
+            "${transaction.category.toString().substring(0,4)}.",
             style: TextStyle(
               color: Colors.black,
-              fontSize: 30,
+              fontSize: 20,
+              fontWeight: FontWeight.bold
             ),
             ),
         ],
-        )
+        ))
       );
     },
   )
-    
-    );
+    )
+    )
+    ;
 }

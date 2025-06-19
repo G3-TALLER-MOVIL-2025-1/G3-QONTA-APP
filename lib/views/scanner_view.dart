@@ -243,15 +243,16 @@ Widget _buildUI(){
           borderRadius: BorderRadius.circular(10),
         ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 20.0),
-                      Text("Enfoca la imagen dentro del cuadro",
+          SizedBox(height: 35.0),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 25),
+                      child: Text("Enfoca la imagen dentro del cuadro",
                        style: TextStyle(
-                         fontSize: 20,
+                         fontSize: 30,
                          color: Colors.black,
-                       )),
+                       ))),
           SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.30,
           width: MediaQuery.sizeOf(context).width * 0.70,
@@ -262,12 +263,17 @@ Widget _buildUI(){
             XFile picture = await cameraController!.takePicture();
             Gal.putImage(picture.path,);
            },
-           iconSize: 100, 
-           icon: const Icon(
-            Icons.camera,
-            color: Colors.red,
-          ))
-        ],
+          //  iconSize: 100, 
+          //  icon: const Icon(
+          //   Icons.camera,
+          //   color: Colors.red,
+          // )
+          icon: Image.asset("assets/images/ocr.png",
+          height: 50,
+          color: null
+          )
+          ),
+        ]
       )
       )
   );

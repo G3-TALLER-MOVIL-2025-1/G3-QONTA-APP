@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:qonta_app/models/transaction.dart';
+import 'package:qonta_app/models/profile.dart';
 import '../models/user.dart';
 import '../services/api_service.dart';
 class RegisterViewModel with ChangeNotifier {
     final ApiService _apiService = ApiService();
     List<User> _usuarios = [];
     List<User> usuarios = [];
+    List<ProfileData> profile = [];
     bool _isLoading = false;
     String email = '';
     String password = '';
@@ -28,6 +30,13 @@ class RegisterViewModel with ChangeNotifier {
       notifyListeners();
     usuarios = await _apiService.fetchUser(usersid);
     _isLoading = false;
+      notifyListeners();
+    }
+    Future<void> fetchProfileData(int? usersid) async {
+      _isLoading = true;
+      notifyListeners();
+      profile = await _apiService.fetchProfileData(usersid);
+      _isLoading = false;
       notifyListeners();
     }
     Future<bool> validateLogin() async {

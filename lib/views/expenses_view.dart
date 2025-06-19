@@ -83,17 +83,31 @@ class _MyHomePageState extends State<ExpenseView> {
                     ),
                   ],
                 ),
+                
                 Container(
                   decoration: BoxDecoration(
                     color: kBackgroundColor,
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(25),
                   ),
                   child: Column(
                     // crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      Row(                      
+                       mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                       const Text(
                         'Ingreso Manual',
                         style: TextStyle(color: Colors.black, fontSize: 30),
+                      ),
+                       IconButton(
+                        icon: Image.asset("assets/images/register.png",
+                        height: 50,
+                        color: null
+                        ),
+                        onPressed: () {
+                          // do something here
+                      }),
+                      ]
                       ),
                       // SizedBox(height: 10.0),
                       // Align(
@@ -134,7 +148,10 @@ class _MyHomePageState extends State<ExpenseView> {
                     
 
                       const SizedBox(height: 20),
-                        TextFormField(
+
+                        Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                         controller: _amountController,
                          style: TextStyle(color: Colors.black,
                         fontSize: 20
@@ -152,6 +169,7 @@ class _MyHomePageState extends State<ExpenseView> {
                         fillColor: kFieldColor,
                         filled: true,
                         ),
+                        
 
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -167,9 +185,12 @@ class _MyHomePageState extends State<ExpenseView> {
                       onChanged: (val) => viewModel.amount = val,
 
                       ),
+                        ),
 
                         const SizedBox(height: 20),
-                        TextFormField(
+                        Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                         controller: _categoryController,
                          style: TextStyle(color: Colors.black,
                         fontSize: 20
@@ -202,9 +223,12 @@ class _MyHomePageState extends State<ExpenseView> {
                       onChanged: (val) => viewModel.categoryname = val,
 
                       ),
+                        ),
 
                         const SizedBox(height: 20),
-                        TextFormField(
+                        Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                         controller: _descriptionController,
                          style: TextStyle(color: Colors.black,
                         fontSize: 20
@@ -237,7 +261,7 @@ class _MyHomePageState extends State<ExpenseView> {
                       onChanged: (val) => viewModel.description = val,
 
                       ),
-
+                        ),
                         const SizedBox(height: 20),
 
                       ElevatedButton(
@@ -298,7 +322,7 @@ class _MyHomePageState extends State<ExpenseView> {
                       ),)
                     ],
                   ),
-                ),
+                ),              
               ],
             ),
           ),

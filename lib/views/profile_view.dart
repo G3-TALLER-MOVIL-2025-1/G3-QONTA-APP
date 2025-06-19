@@ -27,7 +27,7 @@ class _MyHomePageState extends State<ProfileView>{
     usersid = UserPreferences.instance.preferences!.getInt('usersid');
 
     return ChangeNotifierProvider(
-      create: (_) => RegisterViewModel()..fetchUser(usersid),
+      create: (_) => RegisterViewModel()..fetchProfileData(usersid),
       child: Consumer<RegisterViewModel>(
       builder: (context, viewModel, _) => Scaffold(
       // appBar: AppBar(backgroundColor: Colors.transparent,
@@ -95,11 +95,11 @@ class _MyHomePageState extends State<ProfileView>{
                     children: [
                      ListTile(
                       leading: Icon(Icons.account_circle, size: 80,),
-                      title: Text("${viewModel.usuarios[0].name} ${viewModel.usuarios[0].lastname} ",style: TextStyle(
+                      title: Text("${viewModel.profile[0].fullname} ",style: TextStyle(
                          fontSize: 25,
                          color: Colors.black,
                        )),
-                      subtitle: Text('${viewModel.usuarios[0].email}',style: TextStyle(
+                      subtitle: Text('${viewModel.profile[0].email}',style: TextStyle(
                          fontSize: 20,
                          color: Colors.black,
                        )),
@@ -110,10 +110,12 @@ class _MyHomePageState extends State<ProfileView>{
                          color: Colors.black,
                        ),
                        textAlign: TextAlign.left),
-                       Text('120 S/.',style: TextStyle(
+                       Padding(padding: EdgeInsets.symmetric(horizontal: 90),
+                       child: Text('120 S/.',style: TextStyle(
                          fontSize: 25,
                          color: Colors.black,
                        )),
+                       ),
                        const SizedBox(height: 50),
                        Text('Último ingreso',style: TextStyle(
                          fontSize: 25,
@@ -141,11 +143,11 @@ class _MyHomePageState extends State<ProfileView>{
                        Row(
                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                           Text('80 S/.',style: TextStyle(
+                           Text('${viewModel.profile[0].amount} S/.',style: TextStyle(
                          fontSize: 25,
                          color: Colors.black,
                        )),
-                       Text('10/05/2025',style: TextStyle(
+                       Text('${viewModel.profile[0].date.substring(0,10)}',style: TextStyle(
                          fontSize: 25,
                          color: Colors.red,
                        )),
