@@ -333,7 +333,12 @@ class _MyHomePageState extends State<RegisterView>{
                               child: FloatingActionButton(
                                 child: Image.asset("assets/images/cross.png"),
                                 onPressed: (){
-                                Navigator.pop(context);
+
+                                 Navigator.pushNamed(
+                                  context,
+                                  'login',
+                                );  
+
                                 },
                                 // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
                                 backgroundColor: kBackgroundColor,

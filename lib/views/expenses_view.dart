@@ -279,13 +279,55 @@ class _MyHomePageState extends State<ExpenseView> {
                             // UserPreferences.instance.preferences!.setInt('usersid', success);
                             // pref.setInt('usersid', success);
                             // print('Navigator: '+usersid.toString());
-                            Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                            builder: (_) => const
-                            MainView(),
+                            // Navigator.pushReplacement(
+                            // context,
+                            // MaterialPageRoute(
+                            // builder: (_) => const
+                            // MainView(),
+                            // ),
+                            // );
+                            print("Egreso registrado ${success}");
+                            await showDialog(
+                  //if set to true allow to close popup by tapping out of the popup
+                  barrierDismissible: false, 
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                             backgroundColor: kBackgroundColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(32.0))),
+                            contentPadding: EdgeInsets.all(10.0),
+                            content: Stack(
+                            children: <Widget>[
+                            Container(
+                            width: 200,
+                            height: 200,
+                            child:Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text("¡Registro exitoso!", style:TextStyle(fontSize: 30.0,color: Colors.black)),
+                              )//
                             ),
-                            );
+                          ),
+                             Positioned(
+                              top: 0.0,
+                              right: 0.0,
+                              child: FloatingActionButton(
+                                child: Image.asset("assets/images/cross.png"),
+                                onPressed: (){
+                                Navigator.pop(context);
+                                },
+                                // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
+                                backgroundColor: kBackgroundColor,
+                                mini: true,
+                                elevation: 0.0,
+                              ),
+                            ), 
+                            ]
+                          )
+                          )
+                          );
+
+
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content:

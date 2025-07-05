@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "D:\\dev2\\flutter\\packages\\flutter_tools\\gradle\\src\\main\\groovy\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\Usuario\\AppData\\Local\\Android\\sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "C:\\Users\\Usuario\\Desktop\\FLUTTER\\proyecto\\G3-QONTA-APP\\android\\app\\.cxx\\RelWithDebInfo\\3l6b112t\\arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\Usuario\\AppData\\Local\\Android\\sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "C:\\Users\\Usuario\\Desktop\\FLUTTER\\proyecto\\G3-QONTA-APP\\android\\app\\.cxx\\RelWithDebInfo\\3l6b112t\\arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

@@ -1,7 +1,7 @@
 class Transaction {
-  final String amount;
-  final String category;
-  final String description;
+  String amount;
+  String? category;
+  String description;
   String? date = "";
   
 

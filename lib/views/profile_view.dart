@@ -95,11 +95,11 @@ class _MyHomePageState extends State<ProfileView>{
                     children: [
                      ListTile(
                       leading: Icon(Icons.account_circle, size: 80,),
-                      title: Text("${viewModel.profile[0].fullname} ",style: TextStyle(
+                      title: Text("${viewModel.profile.fullname} ",style: TextStyle(
                          fontSize: 25,
                          color: Colors.black,
                        )),
-                      subtitle: Text('${viewModel.profile[0].email}',style: TextStyle(
+                      subtitle: Text('${viewModel.profile.email}',style: TextStyle(
                          fontSize: 20,
                          color: Colors.black,
                        )),
@@ -143,11 +143,17 @@ class _MyHomePageState extends State<ProfileView>{
                        Row(
                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                           Text('${viewModel.profile[0].amount} S/.',style: TextStyle(
+                           Text('${viewModel.profile.amount} S/.',style: TextStyle(
                          fontSize: 25,
                          color: Colors.black,
                        )),
-                       Text('${viewModel.profile[0].date.substring(0,10)}',style: TextStyle(
+                       (viewModel.profile.date == null || viewModel.profile.date == "")?
+                       Text('${viewModel.profile.date}',style: TextStyle(
+                         fontSize: 25,
+                         color: Colors.red,
+                       )) :
+                       
+                       Text('${viewModel.profile.date.substring(0,10)}',style: TextStyle(
                          fontSize: 25,
                          color: Colors.red,
                        )),

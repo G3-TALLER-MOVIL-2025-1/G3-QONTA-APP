@@ -7,7 +7,9 @@ class RegisterViewModel with ChangeNotifier {
     final ApiService _apiService = ApiService();
     List<User> _usuarios = [];
     List<User> usuarios = [];
-    List<ProfileData> profile = [];
+    // List<ProfileData> profile = [];
+    ProfileData profile = new ProfileData(email: "", fullname: "", amount: "", date: "");
+
     bool _isLoading = false;
     String email = '';
     String password = '';
@@ -79,6 +81,7 @@ class RegisterViewModel with ChangeNotifier {
     Future<int> saveExpense() async {
       _isLoading = true;
       notifyListeners();
+      
       int expensesid = await _apiService.saveExpense(Transaction(amount: amount, category: categoryname, description: description));
       // final user = _usuarios.firstWhere(
       //   (u) => u.email == email && u.password == password,

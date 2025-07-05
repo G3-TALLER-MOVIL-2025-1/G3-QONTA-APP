@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MainView>{
          
           Padding(
             // padding: const EdgeInsets.symmetric(horizontal: 100.0),
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(0.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MainView>{
                 padding: const EdgeInsets.all(0.0),
                 child: Container(
                   // margin: EdgeInsets.symmetric(horizontal: 10.0,),
-                  padding: EdgeInsets.all(45.0),
+                  padding: EdgeInsets.all(35.0),
                   decoration: BoxDecoration(
                     color: kBackgroundColor,
                     borderRadius: BorderRadius.circular(25),
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MainView>{
                   child: Column(
                     
                     children: [
-                      SizedBox(height: 10.0),
+                      // SizedBox(height: 10.0),
                       Text("Tu saldo actual",
                        style: TextStyle(
                          fontSize: 25,
@@ -141,16 +141,18 @@ class _MyHomePageState extends State<MainView>{
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
-
+                      // SizedBox(height: 100.0),
                       IconButton(
                         icon: Image.asset("assets/images/register.png",
                         height: 50,
-                        color: null
+                        width: 50,
+                        color: null,
                         ),
+                        padding: new EdgeInsets.all(0.0),
                         onPressed: () {
                           // do something here
                         }),
-
+                      SizedBox(height: 20.0),
 
                     ],
                   )

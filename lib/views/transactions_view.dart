@@ -6,6 +6,7 @@ import '../viewmodels/search_viewmodel.dart';
 import 'package:provider/provider.dart';
 import '../utils/user_preferences.dart';
 import '../main.dart';
+import '../services/pdf_service.dart';
 
 class TransactionsView extends StatefulWidget {
   // final String title;
@@ -99,6 +100,8 @@ class _MyHomePageState extends State<TransactionsView> {
   
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   static int? usersid;
+   int number = 0;
+   final PdfService pdf_service = PdfService();
   // @override
   // void initState() {
   //   name();
@@ -207,9 +210,11 @@ class _MyHomePageState extends State<TransactionsView> {
                         height: 50,
                         color: null
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           // do something here
-                          
+                          final data = await pdf_service.createInvoice(viewModel.all);
+                          pdf_service.savePdfFile("invoice_$number", data);
+                          number++;
                           showDialog(
                   //if set to true allow to close popup by tapping out of the popup
                   barrierDismissible: false, 

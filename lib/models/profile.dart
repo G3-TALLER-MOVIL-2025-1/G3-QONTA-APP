@@ -18,12 +18,22 @@ class ProfileData {
     required this.amount,
     required this.date,
   });
-  factory ProfileData.fromJson(Map<String, dynamic> json){
+  // factory ProfileData.fromJson(Map<String, dynamic> json){
+  //     return ProfileData(
+  //     email: json['email'] ?? '',
+  //     fullname: json['fullname'] ?? '',
+  //     amount: json['amount'] ?? '',
+  //     date: json['date'] ?? '',
+  //     // name: json['name'] ?? '',
+  //     // lastname: json['lastname'] ?? '',      
+  //   );
+  // }
+  factory ProfileData.fromJson(List<dynamic> json){
       return ProfileData(
-      email: json['email'] ?? '',
-      fullname: json['fullname'] ?? '',
-      amount: json['amount'] ?? '',
-      date: json['date'] ?? '',
+      email: json[0]['email'] ?? '',
+      fullname: json[0]['fullname'] ?? '',
+      amount: json[0]['amount'] ?? '',
+      date: json[0]['date'] ?? '',
       // name: json['name'] ?? '',
       // lastname: json['lastname'] ?? '',      
     );
